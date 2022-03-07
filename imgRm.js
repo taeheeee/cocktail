@@ -11,15 +11,3 @@ function importRmImage(){
             name.innerText = `${data['drinks'][0]['strDrink']}`
 s        })
  }
-
- 
-//             const img = document.querySelector('#img-form img');
-//             const images = data.img;
-//             const chosenImage = images[Math.floor(Math.random() * images.length)];
-//             ctImage.src = `img/${chosenImage}`;
-//             imgForm.appendChild(img);
-//             const ctName = document.createElement('#img-form span');
-//             imgForm.appendChild(span);
-//             ctName.innerText = data.name;
-//         });
-// }
