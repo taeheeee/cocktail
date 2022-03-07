@@ -118,63 +118,26 @@
     </style>
 
     <script>
-
-        // $(document).ready(function () {
-        //         // 시작시 가져 오기 
-        // });
-
-        // function listing() {
-        // }
-
-        // // 코드 작성
-        // function handleOnChange() {
-        //     // 선택된 데이터 가져오기
-        // }
-
-        // $(function () { // 보이기 | 숨기기
-        //     $(window).scroll(function () {
-        //         if ($(this).scrollTop() > 250) { //250 넘으면 버튼이 보여집니다.
-        //             $('#topBtn').fadeIn();
-        //         } else {
-        //             $('#topBtn').fadeOut();
-        //         }
-        //     }); // 버튼 클릭시
-        //     $("#topBtn").click(function () {
-        //         $('html, body').animate({
-        //             scrollTop: 0 // 0 까지 animation 이동합니다.
-        //         }, 400); // 속도 400
-        //         return false;
-        //     });
-        // });
-        var settings = {
-        "url": "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=",
-        "method": "GET",
-        "timeout": 0,
-        };
+        // var settings = {
+        // "url": "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=",
+        // "method": "GET",
+        // "timeout": 0,
+        // };
  
-        $.ajax(settings).done(function (response) {
-            let row = response['drinks']
-            for (let i=0; i< row.length; i++){
-                let name= row[i]['strDrink']
-                let img = row[i]['strDrinkThumb']
-                let recipe = row[i]['strInstructions']
-                let temp_html = ` <div class="col">
-                                    <div class="card h-100">
-                                      <img src="${img}" class="card-img-top" alt="...">
-                                      <div class="card-body">
-                                        <h5 class="card-title">${name}</h5>
-                                        <p class="card-text">${recipe}</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Last updated 3 mins ago</small>
-                                      </div>
-                                    </div>
-                                  </div>`
-                $("#card-group").append(temp_html)
+        // $.ajax(settings).done(function (response) {
+        //     let row = response['drinks']
+        //     for (let i=0; i< row.length; i++){
+        //         let name= row[i]['strDrink']
+        //         let img = row[i]['strDrinkThumb']
+        //         let recipe = row[i]['strInstructions']
+        //         let temp_html = ` `
+        //         $("#card-group").append(temp_html)
 
 
-            }
-                    });
+        //     }
+        //             });
+        
+        
     </script>
 
 </head>
@@ -213,46 +176,29 @@
 
 <!-- 아이템 리스트 들어가기 -->
 <div class="wrap">
-<div class="row row-cols-1 row-cols-md-3 g-4", id = "card-group">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  
+  <div class="row row-cols-1 row-cols-md-6 g-4", id = "card-group"> 
+    {% for row in result %}
+      <div class="col">
+        <div class="card h-100">
+          <img src={{row.strDrinkThumb}} class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{row.strDrink}}</h5>
+            <p class="card-text">{{row.strInstructions}}}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+       </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
+      {%endfor%}
   </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div>
+
   <!-- 게시판 페이징 -->
-  <div class="number_list">  1 2 3 4 5</div>
+  <nav aria-label="Page navigation example">		
+	  <ul id="dyn_ul" class="pagination" style="justify-content: center;">
+	  </ul>
+	</nav>
 </div>
 
 <!-- 아이템 리스트 끝-->
