@@ -30,16 +30,20 @@
    | comment/write | POST | {} |
    | comment/update | POST | {} |
    | comment/delete | POST | {} |
-   |---|-----|---|
 
-   5. 사용된 모듈
+5. 사용된 모듈
 
 - flask
   - blueprint
-  -
-- pymongo
+  - jinja2
+  - url_for
+  - render_template
+  - request
+  - jsonfiy 
+  - render_template
 - requests
--
+- dotenv -> secured enviornment 
+- 
 
 6. 폴더 구조 및 설명
 
@@ -54,3 +58,5 @@
     - commnet.html <---코멘트 ㅏ능 >
     - filter.html <-----필터기능>
   - modules
+
+    - 
