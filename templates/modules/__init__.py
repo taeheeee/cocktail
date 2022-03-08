@@ -14,6 +14,7 @@ app = Flask(__name__)
 # app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 # app.config['MONGO_URI'] = os.environ.get('MONGO_URL')
 
+
 # app.register_blueprint(comment.blueprint)
 app.register_blueprint(filter.blueprint)
 app.register_blueprint(list.blueprint)

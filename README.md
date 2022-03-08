@@ -8,19 +8,31 @@
    2. JINA2 를 이용한 서버 사이드 렌더링의 이해
    3. JWT 토큰을 이용한 프로그램
    <!-- 4. 필요한 기능을 올바르게 구현했나 -->
-3. 
- 
- 
- 
-5. DB 구조화 (DB models.py)
+
+2.
+
+3. DB 구조화 (DB models.py)
+
    User : {
    }
-   
+
    comment :{
 
-   } 
+   }
 
-module extenstion
+4. API
+   | URL | METHOD | DATA |
+   |-------------------|--------|-------------------------------------------------------------------------------------|
+   | user/api/login | POST | {userid[string], password[string], \_id[objectID] } |
+   | user/api/register | POST | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
+   | user/api/logout | GET | {} |
+   | user/api/token | POST | {} |
+   | comment/write | POST | {} |
+   | comment/update | POST | {} |
+   | comment/delete | POST | {} |
+   |---|-----|---|
+
+   5. 사용된 모듈
 
 - flask
   - blueprint
@@ -29,7 +41,7 @@ module extenstion
 - requests
 -
 
-folder structor
+6. 폴더 구조 및 설명
 
 - static
   - css
@@ -39,5 +51,6 @@ folder structor
     - list.css
 - templates
   - html
-    -
+    - commnet.html <---코멘트 ㅏ능 >
+    - filter.html <-----필터기능>
   - modules

@@ -2,7 +2,7 @@ from ..modules import *
 from flask import Blueprint, render_template
 
 
-blueprint= Blueprint('list', __name__, template_folder="../html", url_prefix='/filter')
+blueprint= Blueprint('list', __name__, template_folder="../html", url_prefix='/list')
 
 
 @blueprint.route('/', methods=['GET'])
