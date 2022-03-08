@@ -32,15 +32,13 @@
    }
 
 4. API
-   | URL | METHOD | DATA |
-   |-------------------|--------|--------------------------------------------------------------------------------------|
-   | user/api/login | POST | {userid[string], password[string], \_id[objectID] } |
-   | user/api/register | POST | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
-   | user/api/logout | GET | {} |
-   | comment/write | POST | {userid, idDrink, comments } |
-   | comment/update | POST | {userid, idDrink, comments} |
-   | comment/delete | POST | {userid, idDrink} |
-   | comment/list | GET | { "userid" , "comments", "date" } {} |
+   /user/api/login	POST	{userid[string], password[string]}	로그인
+/user/api/register	POST	{userid[string], username[string], password[string]}	회원가입
+/api/nick	GET	{userid[string],_id[int]}	유저정보 확인
+comment/write	POST	{userid, idDrink, comments }	코멘트 쓰기
+comment/update	POST	{userid, idDrink, comments}	코멘트 업데이트
+comment/delete	POST	{userid, idDrink}	코멘트 제거
+comment/list	GET	{ "userid" , "comments", "date" } {}	코멘트 리스트 확인
 
 5. 사용된 모듈
 
