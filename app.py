@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 app = Flask(__name__)
 
 
@@ -31,7 +31,6 @@ def home():
     return render_template('index.html')
 
 
-
 @app.route('/favorte')
 def favorite():
     return render_template('favorte.html')
@@ -40,10 +39,13 @@ def favorite():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
+    print(msg)
     return render_template('login.html', msg=msg)
 
 @app.route('/register')
 def register():
+    msg = request.args.get("msg")
+    print(msg)
     return render_template('register.html')
 
 
@@ -158,5 +160,5 @@ def api_valid():
 #     return jsonify({'mnt': all_mnt})
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=4200, debug=True)
     
