@@ -116,9 +116,14 @@
             justify-content: center;
             color: red; 
         }
+        .pagination{
+            justify-content: center;
+            margin: 50px;
+        }
     </style>
 
     <script>
+<<<<<<< HEAD
 
         function click(){
            window.location.href='/login';
@@ -181,6 +186,9 @@
 
             }
                     });
+=======
+     
+>>>>>>> origin/kypark
     </script>
 
 </head>
@@ -220,46 +228,42 @@
 
 <!-- 아이템 리스트 들어가기 -->
 <div class="wrap">
-<div class="row row-cols-1 row-cols-md-3 g-4", id = "card-group">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  
+  <div class="row row-cols-1 row-cols-md-6 g-4", id = "card-group"> 
+    {% for row in result %}
+    <a href = "/drink/{{row.strDrink}}" target="_blank">
+      <div class="col">
+        <div class="card h-100" \>
+          <img src={{row.strDrinkThumb}} class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{row.strDrink}}</h5>
+            <p class="card-text">{{row.strInstructions}}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+       </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
+    </a>
+      {%endfor%}
   </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div>
+
   <!-- 게시판 페이징 -->
-  <div class="number_list">  1 2 3 4 5</div>
+  <nav aria-label="Page navigation example">		
+    <ul class="pagination">
+        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+        {% for num in range(1,len+1)%}
+        {%if num == i%}
+        <li class="page-item active"><a class="page-link" href="{{num}}"> {{num}} </a></li>
+        {%else%}
+        <li class="page-item "><a class="page-link" href="{{num}}"> {{num}} </a></li>
+        {% endif %}
+        {%endfor%}
+        <li class="page-item"><a class="page-link" href="">Next</a></li>
+    </ul>
+</div>
+
+	</nav>
 </div>
 
 <!-- 아이템 리스트 끝-->
