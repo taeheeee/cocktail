@@ -11,7 +11,9 @@
 
 2. 참고 api
 
-3. DB 구조화 (DB models.py)
+   1. https://www.thecocktaildb.com/api.php
+
+3. DB 구조화 ()
 
    "user" : {
    "userid" : string,
