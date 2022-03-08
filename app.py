@@ -1,20 +1,19 @@
 import requests
 from flask import Flask, render_template, request, jsonify, url_for
+import jwt
+import datetime
+import hashlib
+from pymongo import MongoClient
+
 app = Flask(__name__)
 
 
-from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://test:xo2609@cluster0.b0i4m.mongodb.net/Cluster0?retryWrites=true&w=majority')
-db = client.dbsparta
+client = MongoClient('mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority')
+db = client.cluster0
 
 SECRET_KEY = 'SPARTA'
 
-import jwt
-
-import datetime
-
-import hashlib
 
 # URL = "www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita&api_key=1"
 #
@@ -140,24 +139,6 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
-
-
-
-#  지역별 필터 기능
-# @app.route("/mnt_select", methods=["GET"])
-# def mnt_select():
-#     doc = []  # 검색을 마친 자료가 들어갈 배열입니다.
-#     area_receive = request.args.get("area_give")
-#     mountains = list(db.mnt_info.find({}, {'_id': False}))  # 산의 전체 목록을 mountains 변수로 받아옵니다.
-#     for mountain in mountains:
-#         if area_receive in mountain['mnt_address']:  # 산의 세부 설명에서 mnt_receive로 받은 검색어를 찾아봅니다.
-#             doc.append(mountain)  # 일치하는 명산의 번호를 doc 배열에 집어넣습니다.
-#     return jsonify({'search_list': doc, 'msg': '검색완료!'})
-
-# @app.route("/mnt_info", methods=["GET"])
-# def mnt_get():
-#     all_mnt = list(db.mnt_info.find({},{'_id':False}))
-#     return jsonify({'mnt': all_mnt})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4200, debug=True)
