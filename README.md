@@ -9,27 +9,36 @@
    3. JWT 토큰을 이용한 프로그램
    <!-- 4. 필요한 기능을 올바르게 구현했나 -->
 
-2.
+2. 참고 api
 
 3. DB 구조화 (DB models.py)
 
-   User : {
+   "user" : {
+   "userid" : string,
+   "username" : string,
+   "password" : string,
+   "\_id" : integer,
+   favorite : list
    }
 
    comment :{
-
+   "\_id" : integer,
+   "userid" : string,
+   "comments" : string,
+   "number" : integer,
+   "idDrink" : integer,
    }
 
 4. API
    | URL | METHOD | DATA |
-   |-------------------|--------|-------------------------------------------------------------------------------------|
+   |-------------------|--------|--------------------------------------------------------------------------------------|
    | user/api/login | POST | {userid[string], password[string], \_id[objectID] } |
    | user/api/register | POST | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
    | user/api/logout | GET | {} |
-   | user/api/token | POST | {} |
-   | comment/write | POST | {} |
-   | comment/update | POST | {} |
-   | comment/delete | POST | {} |
+   | comment/write | POST | {userid, idDrink, comments } |
+   | comment/update | POST | {userid, idDrink, comments} |
+   | comment/delete | POST | {userid, idDrink} |
+   | comment/list | GET | { "userid" , "comments", "date" } {} |
 
 5. 사용된 모듈
 
@@ -39,11 +48,11 @@
   - url_for
   - render_template
   - request
-  - jsonfiy 
+  - jsonfiy
   - render_template
 - requests
-- dotenv -> secured enviornment 
-- 
+- dotenv -> secured enviornment
+-
 
 6. 폴더 구조 및 설명
 
@@ -54,9 +63,14 @@
     - index.css
     - list.css
 - templates
+
   - html
     - commnet.html <---코멘트 ㅏ능 >
     - filter.html <-----필터기능>
+    - list.html
+    - login.html
   - modules
-
-    - 
+    - comment.py
+    - filter.py
+    - list.py
+    - login.py
