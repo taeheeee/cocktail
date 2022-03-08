@@ -9,14 +9,18 @@ from . import comment, filter, list, login, index
 
 
 
-app = Flask(__name__)
+#app2 = Flask(__name__, template_folder="templates/html")
+app = Flask(__name__, template_folder="../html")
 
 # app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 # app.config['MONGO_URI'] = os.environ.get('MONGO_URL')
 
+@app.route('/')
+def index():
 
+    return render_template('index.html')
 
-app.register_blueprint(index.blueprint)
+#app.register_blueprint(index.blueprint)
 # app.register_blueprint(comment.blueprint)
 app.register_blueprint(filter.blueprint)
 app.register_blueprint(list.blueprint)
