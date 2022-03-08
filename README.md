@@ -67,8 +67,8 @@
 - templates
 
   - html
-    - commnet.html <---코멘트 ㅏ능 >
-    - filter.html <-----필터기능>
+    - commnet.html <---코멘트 기능
+    - filter.html <-----필터 기능
     - list.html
     - login.html
   - modules

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% block head %}
-    <link rel="stylesheet" href="style.css" />
+    {% block head %} <link rel="stylesheet" href="{{url_for('static',
+    filename="css/filter.css" )}}" />
     <title>{% block title %}{% endblock %} - My Webpage</title>
     {% endblock %}
   </head>
   <body>
     <div id="filter">
       {% for drink in result.drinks%}
-      <div>{{drink.category}}</div>
+      <div>{{drink.strCategory}}</div>
       {% endfor %}
     </div>
     <div id="content">{% block body%}{% endblock %}</div>

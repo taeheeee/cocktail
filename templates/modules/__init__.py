@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os 
 from datetime import datetime
 from bson.objectid import ObjectId
-from . import comment, filter, list, login
+from . import comment, filter, list, login, index
 
 
 
@@ -15,6 +15,8 @@ app = Flask(__name__)
 # app.config['MONGO_URI'] = os.environ.get('MONGO_URL')
 
 
+
+app.register_blueprint(index.blueprint)
 # app.register_blueprint(comment.blueprint)
 app.register_blueprint(filter.blueprint)
 app.register_blueprint(list.blueprint)
