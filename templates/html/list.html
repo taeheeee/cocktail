@@ -1,6 +1,28 @@
-<style>
-  .list {
-    background-color: red;
-  }
-</style>
-<div class="list_showing">리스크 내용입니다.</div>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>칵테일이미지랜덤</title>
+    <style>
+        #image-random img{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    {# 칵테일 랜덤 이미지    #}
+    <div id="image-random">
+        {% set clen = cocktails | length %}
+        {% set num = range(1, clen) | random %}
+        {% set cocktail = cocktails[num] %}
+        {% set image, name = cocktail['strDrinkThumb'], cocktail['strDrink']%}
+        <img src="{{ image }}">
+        <p>{{ name }}</p>
+    </div>
+    {# 랜덤 이미지 끝 #}
+</body>
+</html>
