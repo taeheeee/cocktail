@@ -164,18 +164,20 @@
   
   <div class="row row-cols-1 row-cols-md-6 g-4", id = "card-group"> 
     {% for row in result %}
+    <a href = "/drink/{{row.strDrink}}" target="_blank">
       <div class="col">
-        <div class="card h-100">
+        <div class="card h-100" \>
           <img src={{row.strDrinkThumb}} class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{row.strDrink}}</h5>
-            <p class="card-text">{{row.strInstructions}}}</p>
+            <p class="card-text">{{row.strInstructions}}</p>
           </div>
           <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
           </div>
        </div>
       </div>
+    </a>
       {%endfor%}
   </div>
 
@@ -190,7 +192,7 @@
         <li class="page-item "><a class="page-link" href="{{num}}"> {{num}} </a></li>
         {% endif %}
         {%endfor%}
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item"><a class="page-link" href="">Next</a></li>
     </ul>
 </div>
 
