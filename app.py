@@ -58,7 +58,7 @@ def register():
 # [회원가입 API]
 # userid, password, username을 받아서, mongoDB에 저장한다
 # 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
-@app.route('/api/register', methods=['POST'])
+@app.route('/user/api/register', methods=['POST'])
 def api_register():
     id_receive = request.form['id_give']
 
@@ -78,7 +78,7 @@ def api_register():
 
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
-@app.route('/api/login', methods=['POST'])
+@app.route('/user/api/login', methods=['POST'])
 # /api/login 창구를 만들어서 그창구에서는 post만 받는것을  def api_login()쪽으로와라
 def api_login():
     id_receive = request.form['id_give']
