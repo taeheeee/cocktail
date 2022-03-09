@@ -14,29 +14,99 @@
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+        <style>
+            * {
+            font-family: 'Gowun Dodum', sans-serif;
+            }
+
+
+            button{
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+
+
+            .name_input{
+                margin-top:30px;
+            }
+
+            .pwd_input{
+                margin-top:30px;
+            }
+             .help{
+            font-size:20px;
+            text-align:left;
+             }
+
+
+        </style>
+
 
         <script>
 
             // 아이디, 비밀번호, 이름을 받아 DB에 저장합니다.
             function register() {
+                let userid = $("#userid").val()
+                let userpw = $("#userpw").val()
+                let usename = $("#usernick").val()
+
+
                 $.ajax({
                     type: "POST",
-                    url: "/api/register",
+                    url: "/user/api/register",
                     data: {
-                        id_give: $('#userid').val(),
-                        pw_give: $('#userpw').val(),
-                        name_give: $('#usernick').val()
+                        id_give: userid,
+                        pw_give: userpw,
+                        name_give: usename
                     },
                     success: function (response) {
+
                         if (response['result'] == 'success') {
+
                             alert('회원가입이 완료되었습니다.')
                             window.location.href = '/login'
                         } else {
                             alert(response['msg'])
                         }
+
                     }
-                })
+                    });
+
+
+
+
+
             }
+
+
+            function checkup() {
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/user/api/registerch",
+                    data: {id_receive : $("#userid").val()},
+                    success: function (response){
+
+                        if (response["exists"]) {
+                        alert('이미존재하는 아이디 입니다.')
+                        $("#input-username").focus()
+
+                     } else {
+                        alert('사용할 수 있는 아이디 입니다.')
+                     }
+
+
+                    }
+
+
+                });
+
+            }
+
+
+
 
         </script>
     </head>
@@ -51,13 +121,14 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input type="text" class="input" id="userid" aria-describedby="emailHelp"
-                                       placeholder="My ID">
+                                <input type="text" class="input" id="userid" placeholder="My ID">
+                                <p id="help-id-login" class="help is-danger"></p>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal pwd_input">
                     <div class="field-label is-normal">
                         <label class="label" for="userpw">PW</label>
                     </div>
@@ -65,11 +136,13 @@
                         <div class="field">
                             <div class="control">
                                 <input type="password" class="input" id="userpw" placeholder="My Password">
+                                <p id="help-password-login" class="help is-danger"></p>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="field is-horizontal">
+                <div class="field is-horizontal name_input">
                     <div class="field-label is-normal">
                         <label class="label" for="usernick">NAME</label>
                     </div>
@@ -77,11 +150,13 @@
                         <div class="field">
                             <div class="control">
                                 <input type="text" class="input" id="usernick" placeholder="My name">
+                                <p id="help-name-login" class="help is-danger"></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <button class="button is-primary" onclick="register()">회원가입</button>
+                <button class="button is-primary is-outlined" onclick="checkup()">ID중복확인</button>
             </div>
         </div>
     </body>

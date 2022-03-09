@@ -1,14 +1,17 @@
-import requests
-from flask import Flask, render_template, request, jsonify, url_for
-app = Flask(__name__)
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+import requests
+from flask import Flask, render_template, request, jsonify,url_for
+app = Flask(__name__)
 
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://test:xo2609@cluster0.b0i4m.mongodb.net/Cluster0?retryWrites=true&w=majority')
+client = MongoClient(os.getenv('DB_URL'))
 db = client.dbsparta
 
-SECRET_KEY = 'SPARTA'
+SECRET_KEY = os.getenv('SECRETKEY')
 
 import jwt
 
@@ -31,6 +34,7 @@ def home():
     return render_template('index.html')
 
 
+
 @app.route('/favorte')
 def favorite():
     return render_template('favorte.html')
@@ -39,13 +43,10 @@ def favorite():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    print(msg)
     return render_template('login.html', msg=msg)
 
 @app.route('/register')
 def register():
-    msg = request.args.get("msg")
-    print(msg)
     return render_template('register.html')
 
 
@@ -58,7 +59,7 @@ def register():
 # [회원가입 API]
 # userid, password, username을 받아서, mongoDB에 저장한다
 # 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
-@app.route('/api/register', methods=['POST'])
+@app.route('/user/api/register', methods=['POST'])
 def api_register():
     id_receive = request.form['id_give']
 
@@ -71,14 +72,21 @@ def api_register():
     db.user.insert_one({'userid': id_receive, 'password': pw_hash, 'username': username_receive})
 
 
-    return jsonify({'result': 'success'})
+    if(id_receive==''):
+        return  jsonify({'result': 'fail','msg':'아이디를 입력하세요'})
+    elif(pw_receive==''):
+        return jsonify({'result': 'fail', 'msg': '비밀번호를 입력하세요'})
+    elif (username_receive == ''):
+        return jsonify({'result': 'fail', 'msg': '이름을 입력하세요'})
+    else:
+        return jsonify({'result': 'success'})
 
 
 
 
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
-@app.route('/api/login', methods=['POST'])
+@app.route('/user/api/login', methods=['POST'])
 # /api/login 창구를 만들어서 그창구에서는 post만 받는것을  def api_login()쪽으로와라
 def api_login():
     id_receive = request.form['id_give']
@@ -91,7 +99,12 @@ def api_login():
     result = db.user.find_one({'userid': id_receive, 'password': pw_hash})
 
     # 찾으면 JWT 토큰을 만들어 발급합니다.
-    if result is not None:
+    if(id_receive==''):
+        return jsonify({'result': 'fail', 'msg': '아이디를 입력해주세요.'})
+    elif(pw_receive==''):
+        return jsonify({'result': 'fail', 'msg': '비밀번호를 입력해주세요.'})
+    elif(result is not None):
+
         # JWT 토큰에는, payload와 시크릿키가 필요합니다.
         # 시크릿키가 있어야 토큰을 디코딩(=풀기) 해서 payload 값을 볼 수 있습니다.
         # 아래에선 id와 exp를 담았습니다. 즉, JWT 토큰을 풀면 유저ID 값을 알 수 있습니다.
@@ -104,10 +117,11 @@ def api_login():
 
         # token을 줍니다.
         return jsonify({'result': 'success', 'token': token})
-
-    # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+    # 찾지 못하면
+
 
 
 
@@ -140,6 +154,16 @@ def api_valid():
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
 
+# 회원가입할때 아이디 중복되는지 확인하는 API
+
+@app.route('/user/api/registerch',methods=['POST'])
+def regis_check():
+    id_receive = request.form['id_receive']
+    exists = bool(db.user.find_one({"userid":id_receive}))
+    return jsonify({'result':'success','exists':exists})
+
+
+
 
 
 
@@ -154,11 +178,11 @@ def api_valid():
 #             doc.append(mountain)  # 일치하는 명산의 번호를 doc 배열에 집어넣습니다.
 #     return jsonify({'search_list': doc, 'msg': '검색완료!'})
 
-# @app.route("/mnt_info", methods=["GET"])
+# @app.route("/mnt_info", meth                                                                            ods=["GET"])
 # def mnt_get():
 #     all_mnt = list(db.mnt_info.find({},{'_id':False}))
 #     return jsonify({'mnt': all_mnt})
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=4200, debug=True)
+    app.run('0.0.0.0', port=5001, debug=True)
     
