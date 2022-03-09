@@ -1,18 +1,13 @@
 from ..modules import * 
-import math
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template
 
 
-blueprint= Blueprint('index', __name__, template_folder="../html", url_prefix='/')
+blueprint= Blueprint('search', __name__, template_folder="../html", url_prefix='/search')
 
 
-@blueprint.route('/', methods=['GET'])
-# def filter_home():
-#     return render_template('filter.html' )
-
-def home():
-    return redirect(url_for('index.index', i=1 ))
-
+# @blueprint.route('/', methods=['GET'])
+# def search_home():
+#     return render_template('search.html' )
 
 def searchByName(keyword):
     r = requests.get(f"http://www.thecocktaildb.com/api/json/v1/1/search.php?s={keyword}")
@@ -23,19 +18,14 @@ def searchByName(keyword):
     # print(list1)
     return list1 
 
-@blueprint.route('/<i>' )
-def index(i):
-
+@blueprint.route('/', methods=['GET'])
+def home():
+    # www.thecocktaildb.com/api/json/v1/1/list.php?c=list
     r = requests.get(f"http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list")
-    result2 = r.json()
+    result = r.json()
 
-    req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-    get_data = req.json()
-
-    length = math.ceil(len(get_data['drinks'])//6)
-    result = get_data["drinks"][6*(int(i)-1):6*int(i)]
-
-    return render_template("child.html",result2=result2, result=result, i = int(i), len = length  )
+    # print(result)
+    return render_template('search.html', result=result)
 
 @blueprint.route('/result', methods=["POST"] )
 def search():
@@ -48,3 +38,5 @@ def search():
     # return render_template("search.html", result2=result2 )
     else : 
         return jsonify({ "msg" : "failed"}) 
+
+

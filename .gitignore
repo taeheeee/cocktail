@@ -1,3 +1,4 @@
-.env
+.dotenv
 .idea
 /templates/modules/__pycache__
+.DS_store

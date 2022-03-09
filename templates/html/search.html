@@ -4,7 +4,27 @@
 
 <script>
 
+        function search() {
+          $.ajax({
+              type: "POST",
+              url:`/search/result`,
+                  data: {keyword_give: $('#input_keyword').val()},
+              success: function (response) {
+                      console.log(response)
+                      response.result.map((data)=>{
+                              console.log(data)
+                       $("#search_result").append(`
+                               <li>
+                                ${data}
+                               </li>
+                               `);
+                          })
+                      
+                  }}
+              )}
 </script>
+
+
 
 {% endblock %}
 {% block content1 %} 
@@ -17,18 +37,19 @@
     <div class="input-group mb-1">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{selected}}</button>
         <ul class="dropdown-menu">
-         {% for drink in result2.drinks %} 
+         {% for drink in result.drinks %} 
           <li><a class="dropdown-item" onclick="" href="#">{{drink.strCategory}}</a></li>
           {% endfor %}
         </ul>
-        <input type="text" class="form-control" id="input_keyword" aria-label="Text input with dropdown button">
+        <input type="text" class="form-control" id="input_keyword"  aria-label="Text input with dropdown button">
         <div style="display: inline-block; margin-left: 10px">
             <button type="button" onclick="search()" class="btn btn-success">찾아보기</button>
         </div>
       </div>
       <div id="search_result">
-        <ul>
-        </ul>
+          <ul>
+
+          </ul>
       </div>
     </div>
     </div>
@@ -42,7 +63,7 @@
 
 {% block content2 %}
   
-  <div class="row row-cols-1 row-cols-md-6 g-4", id = "card-group"> 
+  {# <div class="row row-cols-1 row-cols-md-6 g-4", id = "card-group"> 
     {% for row in result %}
     <a href = "/drink/{{row.strDrink}}" target="_blank">
       <div class="col">
@@ -81,7 +102,7 @@
 
 
 
-  </div>
+  </div> #}
 
 {% endblock %}
 {% block footer %} {% endblock %}
