@@ -48,16 +48,30 @@
             width: 120px;
             height: 60px;
         }
+        .wrap_comment{
+            width : 500px;
+            display: flex;
+            background-color : grey;
+            flex-direction: column;
+            align-items: left;
+            justify-content : center;
+        }
+
+        .wrap_comment .commnet_item{
+            padding : 2px;
+            border-style : 1px solid grey;
+        }
+
     </style>
 
     <script>
         function postcmt() {
-            let user_name = $('#user-name').val()
-            let drinkname = $('#drinkname').val()
+            let user_name =  '{{user}}'
+            let drinkname = '{{drinkname}}'
             let comment = $('#mytext').val()
             $.ajax({
                 type: 'POST',
-                url: '/drink?id_give='+drinkid,
+                url: '/comment/write',
                 data: {username_give: user_name, drink_give: drinkname, comment_give: comment},
                 success: function (response) {
                     alert(response['msg'])
@@ -65,7 +79,30 @@
                 }
             });
         }
-     
+        function add_user_favorite(name, user){
+            console.log(name)
+            $.ajax({ 
+            type: "POST", 
+            url: '/db/add', 
+            data: {user_give: user, drink_give: name}, 
+            success: function(response){
+                window.alert(response['msg'])
+                window.location.reload()
+            }
+        });
+        }
+
+        function delete_user_favorite(name, user){
+            $.ajax({ 
+            type: "POST", 
+            url: '/db/delete', 
+            data: {user_give: user, drink_give: name}, 
+            success: function(response){
+                window.alert(response['msg'])
+                window.location.reload()
+            }
+        });
+        }
     </script>
 
 </head>
@@ -74,17 +111,35 @@
     <div class = "subpage">
         <div class = "cocktail-image">
         </div>
-        <div>
-            <p><h5>칵테일명: {{row.strDrink}}</h5></p>
-            {%for comment in comments%}
-            <dd> comment</dd>
-            {%endfor%}
+        <div class = "liked">
+
+            {%if result == "success"%}
+                {%if row.strDrink in user.favorite%}
+                <button onclick = delete_user_favorite("{{row.strDrink}}","{{user.username}}")>❤️</button>
+                {%else%}
+                <button onclick = add_user_favorite("{{row.strDrink}}","{{user.username}}")>🖤</button>
+                {%endif%}
+            {%else%}
+            <button disabled>🖤</button>
+            {%endif%}
         </div>
-        <div class="mytextarea-comment">
-            <textarea id="mytext" cols="48" rows="3" placeholder="평을 남겨주세요"></textarea>
+        <div class="mytextarea-comment"> <textarea id="mytext" cols="48" rows="3" placeholder="평을 남겨주세요"></textarea>
         </div>
+        <div class="wrap_button">
         <div class="submit">
             <button onclick="postcmt()" id="btn-write" type="button" class="btn btn-success">작성</button>
+        </div>
+        </div>
+            <p><h5>칵테일명: {{row.strDrink}}</h5></p>
+        <div class="wrap_comment">
+            {%for comment in comments   %}
+            <div class="comment_item">{{comment.username}} : {{comment.comment}} {{comment.write_date}}{%if result == "success"%}
+                    <button onclick="delet_comment()" id="btn-write" type="button" class="btn btn-success">삭제</button>
+                    <button onclick="update_comment()" id="btn-write" type="button" class="btn btn-success">수정</button>
+                {%else%}
+                {%endif%}
+                            </div>
+            {%endfor%}
         </div>
         <hr style="margin-top: 70px;">
     </div>
