@@ -1,20 +1,40 @@
 import requests, math
 from flask import Flask, render_template, request, jsonify, url_for
 import jwt
-import datetime
+import datetime, time
 import hashlib
 from pymongo import MongoClient
 
 app = Flask(__name__)
 
 
-@app.route('/drink', methods=['POST'])
+@app.route('/comment/write', methods=['POST'])
 def add_comment():
-    drink_receive = request.form['drink_give']
-    user_receive = request.form['username_give']
-    comment_receive = request.form['comment_give']
+    token_receive = request.cookies.get('mytoken')
 
-client = MongoClient('mongodb+srv://test:qwerty1@cluster0.yhkrb.mongodb.net/Cluster0?retryWrites=true&w=majority')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    userinfo = db.user.find_one({'userid': payload['userid']}, {'_id': 0})
+    is_login = 'success'
+    username = userinfo['username']
+    write_date= time.strftime('%c', time.localtime(time.time()))
+    drink_receive = request.form['drink_give']
+    comment_receive = request.form['comment_give']
+    
+    print(drink_receive,username,comment_receive) 
+# {'$inc':{'num': int(1)}
+    db.comment.insert_one({'username': username, 'drink_name' : drink_receive, 'comment' : comment_receive, 'write_date': write_date } )
+    return jsonify({'msg': '코멘트가 추가되었습니다.'})
+
+# @app.route('/drink/delete', methods=['POST'])
+# def delete_user_favorite():
+#     user_receive = request.form['user_give']
+#     drink_receive = request.form['drink_give']
+#     user_data = db.user.update_one({'username':user_receive}, {'$pull':{'favorite': drink_receive}})
+#     return jsonify({'msg': '즐겨찾기에 제거되었습니다.'})
+
+DB_URL = 'mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority'
+
+client = MongoClient(DB_URL)
 db = client.cluster0
 
 SECRET_KEY = 'SPARTA'
@@ -83,10 +103,15 @@ def sub_page(drinkname):
 
     req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
     result = req.json()
-    comment_list = db.drinks.find({'name': drinkname})
+
+    comment_list = list(db.comment.find({"drink_name" : drinkname})) 
+
+
+    print(comment_list) 
+
     for row in result['drinks']:
         if row['strDrink'] == drinkname:
-            return render_template("detail.html", comments = comment_list, row= row,result = is_login , user = user_data)
+            return render_template("detail.html",comments = comment_list, drinkname = drinkname, row= row,result = is_login , user = user_data)
 
 
 
@@ -205,5 +230,8 @@ def delete_user_favorite():
     return jsonify({'msg': '즐겨찾기에 제거되었습니다.'})
 
 
+
+
+
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=4200, debug=True)
