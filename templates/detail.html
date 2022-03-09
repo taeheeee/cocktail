@@ -65,7 +65,30 @@
                 }
             });
         }
-     
+        function add_user_favorite(name, user){
+            console.log(name)
+            $.ajax({ 
+            type: "POST", 
+            url: '/db/add', 
+            data: {user_give: user, drink_give: name}, 
+            success: function(response){
+                window.alert(response['msg'])
+                window.location.reload()
+            }
+        });
+        }
+
+        function delete_user_favorite(name, user){
+            $.ajax({ 
+            type: "POST", 
+            url: '/db/delete', 
+            data: {user_give: user, drink_give: name}, 
+            success: function(response){
+                window.alert(response['msg'])
+                window.location.reload()
+            }
+        });
+        }
     </script>
 
 </head>
@@ -73,6 +96,18 @@
 <body>
     <div class = "subpage">
         <div class = "cocktail-image">
+        </div>
+        <div class = "liked">
+
+            {%if result == "success"%}
+                {%if row.strDrink in user.favorite%}
+                <button onclick = delete_user_favorite("{{row.strDrink}}","{{user.username}}")>❤️</button>
+                {%else%}
+                <button onclick = add_user_favorite("{{row.strDrink}}","{{user.username}}")>🖤</button>
+                {%endif%}
+            {%else%}
+            <button disabled>🖤</button>
+            {%endif%}
         </div>
         <div>
             <p><h5>칵테일명: {{row.strDrink}}</h5></p>

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import requests
+import requests, math
 from flask import Flask, render_template, request, jsonify, url_for
 import jwt
 import datetime
@@ -8,23 +7,6 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-=======
-import requests, math
-from flask import Flask, render_template, request, jsonify
-from pymongo import MongoClient
-app = Flask(__name__)
-
-client = MongoClient('mongodb+srv://test:qwerty1@cluster0.yhkrb.mongodb.net/Cluster0?retryWrites=true&w=majority')
-db = client.dbsparta
-
-req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-result = req.json()
-
-@app.route('/')
-@app.route('/<i>')
-def home(i=1):
-    return render_template("index.html", i = int(i), len = math.ceil(len(result['drinks'])//6), result= result["drinks"][6*(int(i)-1):6*int(i)])
->>>>>>> origin/kypark
 
 @app.route('/drink', methods=['POST'])
 def add_comment():
@@ -32,8 +14,7 @@ def add_comment():
     user_receive = request.form['username_give']
     comment_receive = request.form['comment_give']
 
-<<<<<<< HEAD
-client = MongoClient('mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://test:qwerty1@cluster0.yhkrb.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.cluster0
 
 SECRET_KEY = 'SPARTA'
@@ -49,9 +30,13 @@ SECRET_KEY = 'SPARTA'
 ##  HTML을 주는 부분             ##
 #################################
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+@app.route("/")
+@app.route('/<i>')
+def home(i=1):
+    req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
+    result = req.json()
+    if i == "favicon.ico": i = 1
+    return render_template("index.html", len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
 
 
 @app.route('/favorte')
@@ -62,15 +47,46 @@ def favorite():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    print(msg)
     return render_template('login.html', msg=msg)
 
 @app.route('/register')
 def register():
     msg = request.args.get("msg")
-    print(msg)
     return render_template('register.html')
 
+@app.route('/drink/<drinkname>')
+def sub_page(drinkname):
+    token_receive = request.cookies.get('mytoken')
+
+    # try / catch 문?
+    # try 아래를 실행했다가, 에러가 있으면 except 구분으로 가란 얘기입니다.
+
+    try:
+        # token을 시크릿키로 디코딩합니다.
+        # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
+        # 여기에선 그 예로 닉네임을 보내주겠습니다.
+        userinfo = db.user.find_one({'userid': payload['userid']}, {'_id': 0})
+        # return jsonify({'result': 'success', 'username': userinfo['username']})
+        is_login = 'success'
+        username = userinfo['username']
+    except:
+        # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
+        is_login= 'fail'
+
+    if is_login == "success":
+        user_data = db.user.find_one({'username':username})
+    elif is_login == "fail":
+        user_data = None
+
+    req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
+    result = req.json()
+    comment_list = db.drinks.find({'name': drinkname})
+    for row in result['drinks']:
+        if row['strDrink'] == drinkname:
+            return render_template("detail.html", comments = comment_list, row= row,result = is_login , user = user_data)
 
 
 
@@ -91,7 +107,7 @@ def api_register():
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    db.user.insert_one({'userid': id_receive, 'password': pw_hash, 'username': username_receive})
+    db.user.insert_one({'userid': id_receive, 'password': pw_hash, 'username': username_receive, 'favorite': []})
 
 
     return jsonify({'result': 'success'})
@@ -150,43 +166,44 @@ def api_valid():
         # token을 시크릿키로 디코딩합니다.
         # 보실 수 있도록 payload를 print 해두었습니다. 우리가 로그인 시 넣은 그 payload와 같은 것이 나옵니다.
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
 
         # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
         # 여기에선 그 예로 닉네임을 보내주겠습니다.
         userinfo = db.user.find_one({'userid': payload['userid']}, {'_id': 0})
-        return jsonify({'result': 'success', 'username': userinfo['nick']})
+        return jsonify({'result': 'success', 'username': userinfo['username']})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
+##############################
+##  유저 정보 관련 API       ##
+##############################
+@app.route('/db/user', methods=['POST'])
+def find_user_favorite():
+    user_receive = request.form['user_give']
+    try:
+        user_data = db.favorite.find_one({'user':user_receive})
+        return jsonify({'favorite': user_data['favorite']})
+    except:
+        return jsonify({'favorite': []})
 
+@app.route('/db/add', methods=['POST'])
+def add_user_favorite():
+    user_receive = request.form['user_give']
+    drink_receive = request.form['drink_give']
+    print(user_receive, drink_receive)
+    user_data = db.user.update_one({'username':user_receive}, {'$push':{'favorite': drink_receive}})
+    return jsonify({'msg': '즐겨찾기에 추가되었습니다.'})
 
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=4200, debug=True)
-    
-=======
-    doc = {
-        'name' : drink_receive,
-        'user' : user_receive,
-        'comment' : comment_receive
-    }
-
-    db.drinks.insert_one(doc)
-    
-    return jsonify({'msg' : '성공적으로 작성되었습니다!'})
-
-# 서브 페이지 작업 중
-@app.route('/drink/<drinkname>')
-def sub_page(drinkname):
-    comment_list = db.drinks.find({'name': drinkname})
-    for row in result['drinks']:
-        if row['strDrink'] == drinkname:
-            return render_template("detail.html", comments = comment_list, row= row)
+@app.route('/db/delete', methods=['POST'])
+def delete_user_favorite():
+    user_receive = request.form['user_give']
+    drink_receive = request.form['drink_give']
+    user_data = db.user.update_one({'username':user_receive}, {'$pull':{'favorite': drink_receive}})
+    return jsonify({'msg': '즐겨찾기에 제거되었습니다.'})
 
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
->>>>>>> origin/kypark
