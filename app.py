@@ -19,6 +19,9 @@ import datetime
 
 import hashlib
 
+
+#수정했다. 
+
 # URL = "www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita&api_key=1"
 #
 # r = requests.get(url = URL)
