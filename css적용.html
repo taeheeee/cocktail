@@ -9,6 +9,7 @@
 </head>
 <body>
     <div>
+        <!-- 브라우저 header -->
         <header id="header">
             <h1>cocktail DB</h1>
         </header>
@@ -18,7 +19,7 @@
                     <li>
                         <button>download</button>
                         <input type="text">
-                        <button>검색</button>
+                        <button>cearch</button>
                     </li>
                 </div>
             </ul>
@@ -28,14 +29,16 @@
         </nav>
     <!-- 배너 들어갈 자리 (랜덤 추천으로 들어가는 부분 )-->    
         <div id="main">
-            <article class="post featured">
+            <header>
+                <article class="post featured">
                     <h2>I only drink Champagne on two occasions, when I am in love and when I am not.</h2>
-                </header>
-                <img class="image main" src="images/1.jpg" alt=""/>
-            </article>
+                    <img class="image main" src="images/1.jpg" alt=""/>
+                </article>
+            </header>
             <!--배너 끝-->
 
             <!-- 아이템 리스트 들어가기 -->
+            <!-- item   -->
             <section class="posts">
                 <article>
                     <header>
@@ -43,13 +46,13 @@
                                 ipsum faucibus</a></h2>
                     </header>
                     <a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-                    <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
-                        venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+                    <p>item - 설명</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+                        <li><a href="#" class="button">comment</a></li>
+                        <li><button id="like">❤️</button></li>
                     </ul>
                 </article>
-
+            <!-- item end -->
                 <article>
                     <header>
                         <h2><a href="#">Primis eget<br />
@@ -59,7 +62,7 @@
                     <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
                         venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+                        <li><a href="#" class="button">comment</a></li>
                     </ul>
                 </article>
 
@@ -72,7 +75,8 @@
                     <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
                         venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+
+                        <li><a href="#" class="button">comment</a></li>
                     </ul>
                 </article>
 
@@ -85,7 +89,8 @@
                     <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
                         venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+
+                        <li><a href="#" class="button">comment</a></li>
                     </ul>
                 </article>
 
@@ -98,7 +103,7 @@
                     <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
                         venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+                        <li><a href="#" class="button">comment</a></li>
                     </ul>
                 </article>
 
@@ -111,7 +116,8 @@
                     <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque
                         venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Full Story</a></li>
+
+                        <li><a href="#" class="button">comment</a></li>
                     </ul>
                 </article>
             </section>
@@ -136,7 +142,7 @@
                     </div>
                     <div>
                         <a id="topBtn" href="#">
-                        <button style="margin-top:10px;">[TOP]</button>
+                        <button style="margin-top:10px;">TOP</button>
                     </div>
                 </div>
             </footer>
