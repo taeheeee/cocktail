@@ -49,11 +49,11 @@
 
 | ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
 |-------------------|----------------|--------------------------------------------------------------------------------------|----------|
-| /                 | 1,2,3,4......  | Pagination                                                                           |          |
-| /favorite         | favorite.html  | Check your favorite cocktial if you're my memeber                                    |          |
-| /register         | registr.html   | Register member with ID, PW                                                          |          |
-| /login            | login.html     | Log-in if you're my memeber                                                          |          |
-| /drink/<drinkname>| detail.html    | Show cocktail's detail that you are interseted in                                    |          |
+| /                 | 1,2,3,4......  | Pagination                                                                           | index.py|
+| /favorite         | favorite.html  | Check your favorite cocktial if you're my memeber                                    | index.py|
+| /register         | registr.html   | Register member with ID, PW                                                          | index.py|
+| /login            | login.html     | Log-in if you're my memeber                                                          | index.py|
+| /drink/<drinkname>| detail.html    | Show cocktail's detail that you are interseted in                                    | index.py|
 
 
 6. 사용된 모듈
