@@ -1,0 +1,209 @@
+
+  * {
+  font-family: "Gowun Dodum", sans-serif;
+
+}
+  .pagination{
+       justify-content: center;
+  }
+
+
+
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    position:fixed ;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width:100%;
+    height:50px;
+    padding:10px;
+    z-index:2;
+    background-color:black ;
+
+}
+
+  .icon{
+    font-size:50px;
+    color:white;
+    font-weight:600;
+}
+
+
+
+    .col:hover{
+        transform: translateY(-20px);
+        box-shadow: 0  10px 20px rgba(0,0,0,0.5);
+    }
+
+
+.mytitle {
+  width: 100%;
+  height: 400px;
+
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("https://thumbs.dreamstime.com/b/five-colorful-gin-…-glasses-bar-counter-pup-restaurant-111478962.jpg");
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  #login_button {
+        padding: 0.5rem 1rem;
+
+        color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        float:right;
+
+
+}
+
+   #register_button{
+       display:flex;
+
+   }
+
+
+.mytitle #login_button span:hover {
+  color: white;
+  background: url("login.html");
+  cursor: pointer;
+}
+
+.mytitle .wrap_search {
+  margin : 0 ;
+}
+
+.mytitle .form-control{
+  width: 400px;
+}
+
+.mytitle .search_result {
+
+    margin-left: 96.64px;
+}
+
+
+
+.mytitle #login_button {
+  padding: 0.5rem 1rem;
+
+  color: rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  justify-content: right;
+}
+.mytitle #login_button span:hover {
+  color: white;
+  background: url("login.html");
+  cursor: pointer;
+}
+
+.mytitle .wrap_search {
+  margin : 30px ;
+}
+
+.mytitle .form-control{
+  width: 400px;
+}
+
+.mytitle .search_result{
+  margin-top: 10px;
+  margin-left: 96.64px ;
+    
+  position: fixed; /* 포지션 고정 */
+  /* right: 2.5%; - %도 할수 있음 */
+  /* bottom: 10px; 밑에서 5px */
+  /* display: none; 보여지지 없음 - 기본적으로 안보여지게 */
+
+  text-decoration: none;
+}
+
+.mytitle .search_result ul{
+  padding : 0;
+  margin : 0; 
+  list-style : none;
+}
+
+
+.number_list {
+  display: flex;
+}
+.banner_img {
+  width: 100%;
+  height: 200px;
+  background-color: #FAFAFA;
+}
+.bannner_img:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.wrap {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.wrap .card {
+  margin: 0.7rem;
+}
+.card {
+  width: 100%;
+}
+
+
+
+a#topBtn {
+  position: fixed; /* 포지션 고정 */
+  right: 2.5%; /* - %도 할수 있음*/
+  bottom: 10px; /* 밑에서 5px */
+  display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */
+  z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+
+  text-decoration: none;
+}
+
+.wrap .number_list {
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+/*넘버링*/
+
+.pagin-num{
+    margin-top:100px;
+
+}
+
+/*footer*/
+footer {
+    height: 50px;
+    position: relative;
+    padding: 10px 0px 0px 50px;
+    margin-top:100px;
+    margin-bottom:0px;
+}
+
+.footer-title {
+  font-size: 2em;
+  color: grey;
+}
+
+.footer-detail {
+    color: darkgrey;
+    margin-bottom:0px;
+}
+
