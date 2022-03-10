@@ -20,7 +20,7 @@
    "username" : string,
    "password" : string,
    "\_id" : integer,
-   favorite : list
+   favorite : array
    }
 
    comment :{
