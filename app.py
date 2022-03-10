@@ -55,10 +55,27 @@ SECRET_KEY = 'SPARTA'
 @app.route("/")
 @app.route('/<i>')
 def home(i=1):
+    token_receive = request.cookies.get('mytoken')
+
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        userinfo = db.user.find_one({'userid': payload['userid']}, {'_id': 0})
+        is_login = 'success'
+        username = userinfo['username']
+    except:
+        is_login= 'fail'
+
+    if is_login == "success":
+        user_data = db.user.find_one({'username':username})
+    elif is_login == "fail":
+        user_data = None
+
+    
+
     req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
     result = req.json()
     if i == "favicon.ico": i = 1
-    return render_template("index.html", len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
+    return render_template("index.html", user_data = user_data, len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
 
 
 @app.route('/favorte')

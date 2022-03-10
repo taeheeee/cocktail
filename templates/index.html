@@ -158,7 +158,25 @@
             }
         });
         }
+                function get_cookie(name){
+    return document.cookie.split(';').some(c => {
+        return c.trim().startsWith(name + '=');
+    });
+}
+function delete_cookie( name, path, domain ) {
+  if( get_cookie( name ) ) {
+    document.cookie = name + "=" +
+      ((path) ? ";path="+path:"")+
+      ((domain)?";domain="+domain:"") +
+      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+  }
+}
 
+    function logout(){
+        delete_cookie('mytoken', '/', 'localhost')
+        alert('로그아웃!')
+        window.location.href='/1'
+      }
     
 
     </script>
@@ -167,7 +185,12 @@
 
 <body>
 <div class="mytitle">
-<div id="login_button"><span>로그인</span></div>
+
+        {%if user_data == None%}
+            <div id="login_button"><span>로그인</span></div>
+        {%else%}
+            <div id="login_button" onclick="logout()"><span>{{user_data.username}}님 로그아웃</span></div>
+        {% endif %}
     <br><h1>칵테일 디비 가져오기</h1>
     <br>
     <div class="input-group mb-3">
