@@ -14,7 +14,7 @@
             crossorigin="anonymous"></script>
     
 <style>
-  * {
+   * {
   font-family: "Gowun Dodum", sans-serif;
 }
 
@@ -91,7 +91,7 @@
 
 .mytitle #login_button {
   padding: 0.5rem 1rem;
-  width: 100%;
+  width: 30px;
   color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: right;
@@ -190,6 +190,7 @@ footer {
   color: darkgrey;
 }
 
+
 </style>
 
     <title>칵테일 DB</title>
@@ -276,11 +277,11 @@ function delete_cookie( name, path, domain ) {
 
 <body>
 <div class="mytitle">
-
+ <div id="login_button"> 
         {%if user_data == None%}
-            <div onclick="window.location.href='{{url_for('login')}}'" id="login_button"><span>로그인</span></div>
+            <button onclick="window.location.href='{{url_for('login')}}'"  class="button is-primary">로그인</div>
         {%else%}
-            <div id="login_button" onclick="logout()"><span>{{user_data.username}}님 로그아웃</span></div>
+            <button  onclick="logout()" class="button is-primary">{{user_data.username}}님 로그아웃</div>
         {% endif %}
     <br><h1>칵테일 디비 가져오기</h1>
     <br>
@@ -323,8 +324,8 @@ function delete_cookie( name, path, domain ) {
     
       <div class="col">
 
-        <div class="card h-100" \>
-            <a href = "/drink/{{row.strDrink}}" target="_blank">
+        <div class="card h-100" >
+            <a href = "/drink/{{row.strDrink}}" >
                 <img src={{row.strDrinkThumb}} class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">{{row.strDrink}}</h5>

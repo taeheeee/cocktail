@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests, math
 from flask import Flask, render_template, request, jsonify, url_for
 import jwt
@@ -34,9 +35,8 @@ def add_comment():
 #     user_data = db.user.update_one({'username':user_receive}, {'$pull':{'favorite': drink_receive}})
 #     return jsonify({'msg': '즐겨찾기에 제거되었습니다.'})
 
-DB_URL = 'mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority'
-
-client = MongoClient(os.environ.get(DB_URL))
+# DB_URL = ''
+client = MongoClient('mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority')
 db = client.cluster0
 
 SECRET_KEY = 'SPARTA'
@@ -116,6 +116,7 @@ def sub_page(drinkname):
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         is_login= 'fail'
 
+    print(is_login)
     if is_login == "success":
         user_data = db.user.find_one({'username':username})
     elif is_login == "fail":
