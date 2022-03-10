@@ -4,6 +4,8 @@ import jwt
 import datetime, time
 import hashlib
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -34,7 +36,7 @@ def add_comment():
 
 DB_URL = 'mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority'
 
-client = MongoClient(DB_URL)
+client = MongoClient(os.environ.get(DB_URL))
 db = client.cluster0
 
 SECRET_KEY = 'SPARTA'
