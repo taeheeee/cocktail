@@ -36,13 +36,14 @@
    |------|------|-----|
    | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |
    | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
+   | user/api/nick     | GET    | {userid[string]}
    | search/result     | POST   | {drink_name[string]}                                                                 |
    | favorite/user_check| POST   | {username[string], favorite[array] }                                                |
    | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |
    | favorite/delete_heart| POST   | {username[string], drink_name[string], favorite[array]}                           |
-   | comment/write     | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
-   | comment/update    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
-   | comment/delete    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
+   | comment/write     | POST   | {userid[ogjectID], idDrink[objectID], comments[string], numbering[int]}              |
+   | comment/update    | POST   | {userid[ogjectID], idDrink[objectID], comments[string], numbering[int]}              |
+   | comment/delete    | POST   | {userid[ogjectID], idDrink[objectID], comments[string], numbering[int]}              |
 5.  Route Name
 
 | ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
