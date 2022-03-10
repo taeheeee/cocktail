@@ -126,16 +126,10 @@ def sub_page(drinkname):
 @app.route('/user/api/register', methods=['POST'])
 def api_register():
     id_receive = request.form['id_give']
-
     pw_receive = request.form['pw_give']
-
     username_receive = request.form['name_give']
-
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-
     db.user.insert_one({'userid': id_receive, 'password': pw_hash, 'username': username_receive, 'favorite': []})
-
-
     return jsonify({'result': 'success'})
 
 

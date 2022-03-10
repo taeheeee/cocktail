@@ -1,7 +1,7 @@
 from ..modules import * 
 import math
 import requests, math
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, Blueprint
 import jwt
 import datetime, time
 import hashlib

@@ -83,7 +83,7 @@
             console.log(name)
             $.ajax({ 
             type: "POST", 
-            url: '/db/add', 
+            url: '/favorite/add_heart', 
             data: {user_give: user, drink_give: name}, 
             success: function(response){
                 window.alert(response['msg'])
@@ -95,7 +95,7 @@
         function delete_user_favorite(name, user){
             $.ajax({ 
             type: "POST", 
-            url: '/db/delete', 
+            url: '/favorite/delete_heart', 
             data: {user_give: user, drink_give: name}, 
             success: function(response){
                 window.alert(response['msg'])

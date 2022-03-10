@@ -1,7 +1,7 @@
 from ..modules import * 
 import math
 import requests, math
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, Blueprint
 import jwt
 import datetime, time
 import hashlib
@@ -26,7 +26,7 @@ SECRET_KEY = 'SPARTA'
 ##  HTML을 주는 부분             ##
 #################################
 
-
+@blueprint.route('/')
 @blueprint.route('/<i>' )
 def home(i=1):
     r = requests.get(f"http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list")
@@ -35,10 +35,7 @@ def home(i=1):
     req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
     result = req.json()
     if i == "favicon.ico": i = 1
-    return render_template("index.html", result2 = result2, len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
-
-    req = requests.get(f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-    get_data = req.json()
+    return render_template("child.html", result2 = result2,len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
 
 ##무슨 작업페이지일까?
 @blueprint.route('/favorte')
