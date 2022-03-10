@@ -13,116 +13,207 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     
+<style>
+  * {
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.mytitle {
+  width: 100%;
+  height: 400px;
+
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("https://i.imgur.com/wVQ10Wi.jpg");
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mytitle #login_button {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: right;
+}
+.mytitle #login_button span:hover {
+  color: white;
+  background: url("login.html");
+  cursor: pointer;
+}
+
+.mytitle .wrap_search {
+  margin : 0 ;
+}
+
+.mytitle .form-control{
+  width: 400px;
+}
+
+.mytitle .search_result{
+
+  margin-left: 96.64px ;
+<style>
+  * {
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.mytitle {
+  width: 100%;
+  height: 400px;
+
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("https://i.imgur.com/wVQ10Wi.jpg");
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  {# justify-content: ; #}
+}
+
+.mytitle #login_button {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: right;
+}
+.mytitle #login_button span:hover {
+  color: white;
+  background: url("login.html");
+  cursor: pointer;
+}
+
+.mytitle .wrap_search {
+  margin : 0 ;
+}
+
+.mytitle .form-control{
+  width: 400px;
+}
+
+.mytitle .search_result{
+  margin-top: 10px;
+  margin-left: 96.64px ;
+    
+  position: fixed; /* 포지션 고정 */
+  /* right: 2.5%; - %도 할수 있음 */
+  /* bottom: 10px; 밑에서 5px */
+  /* display: none; 보여지지 없음 - 기본적으로 안보여지게 */
+
+  text-decoration: none;
+}
+
+.mytitle .search_result ul{
+  padding : 0;
+  margin : 0; 
+  list-style : none;
+}
+
+
+.number_list {
+  display: flex;
+}
+.banner_img {
+  width: 100%;
+  height: 200px;
+  background-color: bisque;
+}
+.bannner_img:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.wrap {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.wrap .card {
+  margin: 0.7rem;
+}
+.card {
+  width: 100%;
+}
+
+
+
+a#topBtn {
+  position: fixed; /* 포지션 고정 */
+  right: 2.5%; /* - %도 할수 있음*/
+  bottom: 10px; /* 밑에서 5px */
+  display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */
+  z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+
+  text-decoration: none;
+}
+
+.wrap .number_list {
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/*footer*/
+footer {
+  height: 150px;
+  position: relative;
+  padding: 10px 0px 0px 50px;
+}
+
+.footer-title {
+  font-size: 2em;
+  color: grey;
+}
+
+.footer-detail {
+  color: darkgrey;
+}
+
+</style>
 
     <title>칵테일 DB</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            font-family: 'Gowun Dodum', sans-serif;
-        }
-
-
-        .mytitle {
-            width: 100%;
-            height: 400px;
-
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/wVQ10Wi.jpg');
-            background-position: center;
-            background-size: cover;
-
-            color: white;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mytitle #login_button {
-            padding : 0.5rem 1rem;
-            width: 100%;
-            color :rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: right;
-
-        }
-        .mytitle #login_button span:hover{
-            color : white;
-            /* background: url("login.html"); */
-            cursor: pointer;
-        }
-        
-
-        .number_list {
-            
-            display: flex;
-        }
-        .banner_img {
-            width: 100%;
-            height: 200px;    
-            background-color: bisque;
-
-        }
-        .bannner_img:hover {
-            background-color: grey;
-            cursor: pointer;
-        }
-
-       
-        .wrap {
-            padding : 0.5rem 1rem;
-        }
-        .wrap .card{
-            margin: 0.7rem;
-        }
-        .card {
-            width: 100%;
-            
-        }
-
-        /*footer*/
-        footer {
-            height: 150px;
-            position: relative;
-            padding: 10px 0px 0px 50px;
-
-        }
-        .footer-title {
-            font-size: 2em;
-            color: grey;
-        }
-
-        .footer-detail {
-            color: darkgrey;
-        }
-
-        a#topBtn {
-            position: fixed; /* 포지션 고정 */
-            right: 2.5%; /* - %도 할수 있음*/
-            bottom: 10px; /* 밑에서 5px */
-            display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */
-            z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
-
-            text-decoration: none;
-        }
-
-        .wrap .number_list {
-            padding : 3px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            color: red; 
-        }
-        .pagination{
-            justify-content: center;
-            margin: 50px;
-        }
-    </style>
-
     <script>
+          function search() {
+          $.ajax({
+              type: "POST",
+              url:`/search/result`,
+                  data: {keyword_give: $('#input_keyword').val()},
+              success: function (response) {
+                      console.log(response)
+                      response.result.map((data)=>{
+                              console.log(data)
+                       $("#search_result").append(`
+                               <li>
+                                ${data}
+                               </li>
+                               `);
+                          })
+                  }}
+              )}
+
         var user;
         var favorite;
         var login_result;
@@ -187,33 +278,37 @@ function delete_cookie( name, path, domain ) {
 <div class="mytitle">
 
         {%if user_data == None%}
-            <div id="login_button"><span>로그인</span></div>
+            <div onclick="window.location.href='{{url_for('login')}}'" id="login_button"><span>로그인</span></div>
         {%else%}
             <div id="login_button" onclick="logout()"><span>{{user_data.username}}님 로그아웃</span></div>
         {% endif %}
     <br><h1>칵테일 디비 가져오기</h1>
     <br>
-    <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+    <div class="wrap_search">
+
+    <div class="input-group mb-1">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{selected}}</button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Separated link</a></li>
+         {% for drink in result2.drinks %} 
+          <li><a class="dropdown-item" onclick="" href="#">{{drink.strCategory}}</a></li>
+          {% endfor %}
         </ul>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <input type="text" class="form-control" id="input_keyword" aria-label="Text input with dropdown button">
         <div style="display: inline-block; margin-left: 10px">
-            <button type="button" onclick="handleOnChange()" class="btn btn-success">찾아보기</button>
+            <button type="button" onclick="search()" class="btn btn-success">찾아보기</button>
         </div>
       </div>
+      <div id="search_result">
+        <ul>
+        </ul>
+      </div>
     </div>
-</div>
-
     </div>
 
 
-</div>
+
+
+
 <!-- 배너 들어갈 자리 (랜덤 추천으로 들어가는 부분 )-->
 <div class="banner_img"><h1>추천 칵테일 </h1></div>
 <!--배너 끝-->
