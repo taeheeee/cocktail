@@ -11,26 +11,19 @@ import os
 
 blueprint= Blueprint('favorite', __name__, template_folder="../html", url_prefix='/favorite')
 
-SECRET_KEY = "sparta"
+##DB연결 .dotenv 설정  
+client = MongoClient(os.environ.get('MONGO_URL'))
+db = client.cluster0
 
-
-def mongo_connect():
-    client = MongoClient('mongodb+srv://diasm:83XZZ8LwO0rI95en@cluster0.mye6i.mongodb.net/cluster0?retryWrites=true&w=majority')
-    # client = MongoClient(os.environ.get('MONGO_URL'))
-    db = client.cluster0
-    return db
-
-
-db = mongo_connect()
-
-
-#################################
-##  HTML을 주는 부분             ##
-#################################
 
 ##############################
-##  유저 정보 관련 API       ##
+##  즐겨찾기 추가 및 삭제       ##
 ##############################
+
+
+## 즐겨찾기 사용자 체크  
+## End point
+## /favorite/user_check
 @app.route('/user_check', methods=['POST'])
 def find_user_favorite():
     user_receive = request.form['user_give']
@@ -40,6 +33,9 @@ def find_user_favorite():
     except:
         return jsonify({'favorite': []})
 
+## 즐겨찾기 디비에 추가(drink name을 디비에 삽입)
+## End point
+## /favorite/add_heart
 @app.route('/add_heart', methods=['POST'])
 def add_user_favorite():
     user_receive = request.form['user_give']
@@ -48,6 +44,9 @@ def add_user_favorite():
     user_data = db.user.update_one({'username':user_receive}, {'$push':{'favorite': drink_receive}})
     return jsonify({'msg': '즐겨찾기에 추가되었습니다.'})
 
+## 즐겨찾기 디비에 삭제(drink name을 디비에 삭제)
+## End point
+## /favorite/delete_heart
 @app.route('/delete_heart', methods=['POST'])
 def delete_user_favorite():
     user_receive = request.form['user_give']

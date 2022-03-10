@@ -1,32 +1,29 @@
 from ..modules import * 
 from flask import Blueprint, render_template
 
-
 blueprint= Blueprint('search', __name__, template_folder="../html", url_prefix='/search')
 
 
-# @blueprint.route('/', methods=['GET'])
-# def search_home():
-#     return render_template('search.html' )
 
+## 검색 결과를 리스트로 return 
 def searchByName(keyword):
+
     r = requests.get(f"http://www.thecocktaildb.com/api/json/v1/1/search.php?s={keyword}")
+
     result = r.json()['drinks']
     list1 =[] 
+
     for x in result:
         list1.append(x['strDrink'])
-    # print(list1)
+
     return list1 
 
-@blueprint.route('/', methods=['GET'])
-def home():
-    # www.thecocktaildb.com/api/json/v1/1/list.php?c=list
-    r = requests.get(f"http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list")
-    result = r.json()
 
-    # print(result)
-    return render_template('search.html', result=result)
 
+
+##칵테일 이름으로 검색 결과 
+## End point
+## /search/result
 @blueprint.route('/result', methods=["POST"] )
 def search():
     keyword_receive = request.form['keyword_give']

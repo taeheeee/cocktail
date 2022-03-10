@@ -32,17 +32,28 @@
    }
 
 4. API
-   | URL | METHOD | DATA |
-   |-------------------|--------|--------------------------------------------------------------------------------------|
-   | user/api/login | POST | {userid[string], password[string], \_id[objectID] } |
-   | user/api/register | POST | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
-   | user/api/logout | GET | {} |
-   | comment/write | POST | {userid, idDrink, comments } |
-   | comment/update | POST | {userid, idDrink, comments} |
-   | comment/delete | POST | {userid, idDrink} |
-   | comment/list | GET | { "userid" , "comments", "date" } {} |
+   | URL | METHOD | DATA | TABLE |
+   |------|------|-----|-------|
+   | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |       |
+   | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |       |
+   | user/api/logout   | GET    | {}                                                                                   |       |
+   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
+   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
+   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
+   | comment/update    | POST   | {userid, idDrink, comments}                                                          |       |
+   | comment/delete    | POST   | {userid, idDrink}                                                                    |       |
+   | comment/list      | GET    | { "userid" , "comments", "date" } {}                                                 |       |
+5.  Route Name
 
-5. 사용된 모듈
+| ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
+|-------------------|----------------|--------------------------------------------------------------------------------------|----------|
+| /                 | 1,2,3,4......  | Pagination                                                                           |          |
+| /comment          | comment.py     |                                                                                      |          |
+| user/api/register | POST           | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |          |
+| user/api/logout   | GET            | {}                                                                                   |          |
+
+
+6. 사용된 모듈
 
 - flask
   - blueprint

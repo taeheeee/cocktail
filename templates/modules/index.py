@@ -26,6 +26,9 @@ SECRET_KEY = 'SPARTA'
 ##  HTML을 주는 부분             ##
 #################################
 
+## 메인 페이지 
+## End point
+## /
 @blueprint.route('/')
 @blueprint.route('/<i>' )
 def home(i=1):
@@ -38,6 +41,8 @@ def home(i=1):
     return render_template("child.html", result2 = result2,len = math.ceil(len(result['drinks'])/6), result= result["drinks"][6*(int(i)-1):6*int(i)])
 
 ##무슨 작업페이지일까?
+## End point
+## /index
 @blueprint.route('/favorte')
 def favorite():
     return render_template('favorte.html')
