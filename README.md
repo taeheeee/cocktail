@@ -32,17 +32,17 @@
    }
 
 4. API
-   | URL | METHOD | DATA | TABLE |
-   |------|------|-----|-------|
-   | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |       |
-   | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |       |
-   | search/result     | POST   | {drink_name[string]}                                                                 |       |
-   | favorite/user_check| POST   | {username[string], favorite[array] }                                                |       |
-   | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |       |
-   | favorite/delete_heart| POST   | {username[string], drink_name[string], favorite[array]}                           |       |
-   | comment/write     | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
-   | comment/update    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
-   | comment/delete    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
+   | URL | METHOD | DATA |
+   |------|------|-----|
+   | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |
+   | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |
+   | search/result     | POST   | {drink_name[string]}                                                                 |
+   | favorite/user_check| POST   | {username[string], favorite[array] }                                                |
+   | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |
+   | favorite/delete_heart| POST   | {username[string], drink_name[string], favorite[array]}                           |
+   | comment/write     | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
+   | comment/update    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
+   | comment/delete    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |
 5.  Route Name
 
 | ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
