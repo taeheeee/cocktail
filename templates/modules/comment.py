@@ -21,11 +21,17 @@ SECRET_KEY = 'SPARTA'
 
 
 
+## TODO: 삭제 수정 업데이트 해야함
 
 #################################
-##  API을 주는 부분             ##
+##  COMMENT  CURD             ##
 #################################
 
+
+##  코멘트 쓰기 
+##  End point
+##  /comment/write
+##  TODO : increased number 해야함
 @blueprint.route('/write', methods=['POST'])
 def add_comment():
     token_receive = request.cookies.get('mytoken')
@@ -43,8 +49,22 @@ def add_comment():
     db.comment.insert_one({'username': username, 'drink_name' : drink_receive, 'comment' : comment_receive, 'write_date': write_date } )
     return jsonify({'msg': '코멘트가 추가되었습니다.'})
 
-# @app.route('/drink/delete', methods=['POST'])
-# def delete_user_favorite():
+##  코멘트 삭제 
+##  End point
+##  /comment/delete
+# @app.route('/delete')
+# def delete_comment():
+#     user_receive = request.form['user_give']
+#     drink_receive = request.form['drink_give']
+#     user_data = db.user.update_one({'username':user_receive}, {'$pull':{'favorite': drink_receive}})
+#     return jsonify({'msg': '즐겨찾기에 제거되었습니다.'})
+
+
+##  코멘트 수정 
+##  End point
+##  /comment/update
+# @app.route('/update') 
+# def update_comment():
 #     user_receive = request.form['user_give']
 #     drink_receive = request.form['drink_give']
 #     user_data = db.user.update_one({'username':user_receive}, {'$pull':{'favorite': drink_receive}})

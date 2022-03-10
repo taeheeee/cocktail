@@ -2,44 +2,6 @@
 {% block title %} 입력한거{% endblock %}
 {% block head %}
 
-    <script>
-        var user;
-        var favorite;
-        var login_result;
-
-        window.onload = is_login()
-
-        {# function is_login(){
-            $.ajax({
-                type: 'GET',
-                url: '/api/nick',
-                data: {},
-                success: function(response){
-                    if (response['result'] == "success"){
-                        user = response['username']
-                        login_result = response['result']
-                        find_user_favor()
-                    }
-                    else{
-                        window.alert(response['msg'])
-                        // window.location.href = '/login'
-                    }
-                }
-            });
-        } #}
-
-        function find_user_favor(){
-            $.ajax({ 
-            type: "POST", 
-            url: '/favorite/user_check', 
-            data: {user_give: user}, 
-            success: function(response){
-                favorite = response['favorite']
-            }
-        });
-        }
-
-</script>
 
 {% endblock %}
 
