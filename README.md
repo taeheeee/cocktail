@@ -36,21 +36,24 @@
    |------|------|-----|-------|
    | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |       |
    | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |       |
+   | user/api/nick     | GET    | {userid[string], _id[objectID]}                                                      |       |
    | user/api/logout   | GET    | {}                                                                                   |       |
-   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
-   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
-   | comment/write     | POST   | {username, drink_name, comment, write_date }                                         |       |
-   | comment/update    | POST   | {userid, idDrink, comments}                                                          |       |
-   | comment/delete    | POST   | {userid, idDrink}                                                                    |       |
-   | comment/list      | GET    | { "userid" , "comments", "date" } {}                                                 |       |
+   | search/result     | POST   | {drink_name[string]}                                                                 |       |
+   | favorite/user_check| POST   | {username[string], favorite[array] }                                                |       |
+   | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |       |
+   | favorite/delete_heart| POST   | {username[string], drink_name[string], favorite[array]}                           |       |
+   | comment/write     | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
+   | comment/update    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
+   | comment/delete    | POST   | {userid[ogjectID], idDrink[objectID], comments[string]}                              |       |
 5.  Route Name
 
 | ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
 |-------------------|----------------|--------------------------------------------------------------------------------------|----------|
 | /                 | 1,2,3,4......  | Pagination                                                                           |          |
-| /comment          | comment.py     |                                                                                      |          |
-| user/api/register | POST           | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |          |
-| user/api/logout   | GET            | {}                                                                                   |          |
+| /favorite         | favorite.html  | Check your favorite cocktial if you're my memeber                                    |          |
+| /register         | registr.html   | Register member with ID, PW                                                          |          |
+| /login            | login.html     | Log-in if you're my memeber                                                          |          |
+| /drink/<drinkname>| detail.html    | Show cocktail's detail that you are interseted in                                    |          |
 
 
 6. 사용된 모듈
