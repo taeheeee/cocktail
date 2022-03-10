@@ -36,8 +36,6 @@
    |------|------|-----|-------|
    | user/api/login    | POST   | {userid[string], password[string], \_id[objectID] }                                  |       |
    | user/api/register | POST   | {userid[string], username[string], password[string], \_id[objectID], favorite[list]} |       |
-   | user/api/nick     | GET    | {userid[string], _id[objectID]}                                                      |       |
-   | user/api/logout   | GET    | {}                                                                                   |       |
    | search/result     | POST   | {drink_name[string]}                                                                 |       |
    | favorite/user_check| POST   | {username[string], favorite[array] }                                                |       |
    | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |       |
