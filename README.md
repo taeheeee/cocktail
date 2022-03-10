@@ -41,9 +41,9 @@
    | favorite/user_check| POST   | {username[string], favorite[array] }                                                |
    | favorite/add_heart| POST   | {username[string], drink_name[string], favorite[array]}                              |
    | favorite/delete_heart| POST   | {username[string], drink_name[string], favorite[array]}                           |
-   | comment/write     | POST   | {userid[string], idDrink[objectID], comments[string], numbering[int]}                |
-   | comment/update    | POST   | {userid[string], idDrink[objectID], comments[string], numbering[int]}                |
-   | comment/delete    | POST   | {userid[string], idDrink[objectID], comments[string], numbering[int]}                | 
+   | comment/write     | POST   | {username[string], drink_name[string], comment[string], numbering[int]}                |
+   | comment/update    | POST   | {username[string], drink_name[string], comment[string], numbering[int]}                |
+   | comment/delete    | POST   | {username[string], drink_name[string], comment[string], numbering[int]}                | 
 5.  Route Name
 
 | ROOT ROUTE NAME   | SUB ROUTE NAME | FUNCTIONS                                                                            | LOCATION |
